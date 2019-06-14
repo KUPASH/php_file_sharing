@@ -28,28 +28,29 @@ error_reporting(E_ALL);
             $ext = $ext[count($ext) - 1];
 
             if (!in_array($ext, $allowed_ext)) {
-                exit();
-            }
-        }
-        if(isset($filename[0]) && isset($filename[1])) {
-            $subdirname1 = $filename[0];
-            $subdirname2 = $filename[1];
+                echo '<div style="color: red">ERROR: Invalid file extension; valid jpg, jpeg</div>';
+            }else {
 
-            if (!file_exists('./uploads/' .
-                $subdirname1 . '/' .
-                $subdirname2)
-            ) {
-                mkdir('./uploads/' .
+                $subdirname1 = $filename[0];
+                $subdirname2 = $filename[1];
+
+                if (!file_exists('./uploads/' .
                     $subdirname1 . '/' .
-                    $subdirname2, 0777, true);
-            }
+                    $subdirname2)
+                ) {
+                    mkdir('./uploads/' .
+                        $subdirname1 . '/' .
+                        $subdirname2, 0777, true);
+                }
 
-            move_uploaded_file($_FILES['userFile']['tmp_name'],
-                './uploads/' .
-                $subdirname1 . '/' .
-                $subdirname2 . '/' .
-                $filename . '.' . $ext);
+                move_uploaded_file($_FILES['userFile']['tmp_name'],
+                    './uploads/' .
+                    $subdirname1 . '/' .
+                    $subdirname2 . '/' .
+                    $filename . '.' . $ext);
+            }
         }
+
         function dirToArray($dir) {
 
             $result = [];
@@ -73,7 +74,6 @@ error_reporting(E_ALL);
             return $result;
 
         }
-
         dirToArray('./uploads/');
 
         ?>

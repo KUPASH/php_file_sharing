@@ -8,7 +8,7 @@ if(isset($_GET['name'])) {
     if(file_exists('./uploads/' .
         $name[0] . '/' .
         $name[1]) . '/' .
-        $name) {
+        $name && isset($name[1])) {
         $path = './uploads/' .
             $name[0] . '/' .
             $name[1] . '/' .
